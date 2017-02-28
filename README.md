@@ -1,0 +1,2 @@
+# ganasoft-back
+Ganasoft API.
