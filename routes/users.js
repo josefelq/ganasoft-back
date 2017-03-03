@@ -15,9 +15,25 @@ router.post('/', function(req, res, next) {
     if(err){
       res.status(500).send(err);
     }
-    res.json({message: 'User created!'});
-
+    else{
+      res.json({message: 'User created!'});
+    }
   });
+});
+
+//Get user with email and password
+router.get('/', function(req, res, next){
+  if(Object.keys(req.query).length !== 0){
+    User.findOne({'email':req.query.email, 'password':req.query.password}, function(err, users){
+      if(err){
+        res.status(500).send(err);
+      }
+      res.json(users);
+    });
+  }
+  else{
+    next();
+  }
 });
 
 //Get all users
@@ -30,5 +46,7 @@ router.get('/', function(req, res, next){
   });
 
 });
+
+
 
 module.exports = router;
