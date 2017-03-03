@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var users = require('./routes/users');
 var farms = require('./routes/farms');
+var animals = require('./routes/animals');
 var app = express();
 
 // uncomment after placing your favicon in /public
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', users);
 app.use('/farms', farms);
+app.use('/animals', animals);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

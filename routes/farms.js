@@ -35,6 +35,7 @@ router.post('/', function(req, res, next){
 
 //Get all farms given a user Id
 router.get('/', function(req,res,next){
+  if(Object.keys(req.query).length !== 0){
    let userId=req.query.owner;
    let objId=mongoose.Types.ObjectId(userId);
    Farm.find({'owner': objId}, function(err, farms){
@@ -45,6 +46,22 @@ router.get('/', function(req,res,next){
        res.json(farms);
      }
    });
+ }
+ else{
+   next();
+ }
+});
+
+//Get all farms
+router.get('/', function(req, res, next){
+  Farm.find(function(err, farms){
+    if(err){
+      res.status(500).send(err);
+    }
+    else{
+      res.json(farms);
+    }
+  });
 });
 
 module.exports = router;

@@ -42,9 +42,10 @@ router.get('/', function(req, res, next){
     if(err){
       res.status(500).send(err);
     }
-    res.json(users);
+    else{
+        res.json(users);
+    }
   });
-
 });
 
 
