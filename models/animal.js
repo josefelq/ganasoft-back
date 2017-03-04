@@ -9,5 +9,5 @@ var animalSchema=mongoose.Schema({
   foto: String,
   descripcion: String
 });
-
+s
 module.exports = mongoose.model('Animal', animalSchema);
