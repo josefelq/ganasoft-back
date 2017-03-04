@@ -2,7 +2,7 @@ var mongoose=require('mongoose');
 
 var animalSchema=mongoose.Schema({
   farm: {type: mongoose.Schema.Types.ObjectId, ref: 'Farm'},
-  numero: String,
+  numero: Number,
   especie: String,
   raza: String,
   sexo: String,
