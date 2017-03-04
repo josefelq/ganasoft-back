@@ -8,7 +8,7 @@ var debug = require('debug')('ganasoft-back:server');
 var http = require('http');
 var mongoose = require('mongoose');
 
-const url='mongodb://localhost/test';
+const url='mongodb://webdev:webdev@ds113580.mlab.com:13580/heroku_r69x2mtf';
 
 mongoose.connect(url);
 
