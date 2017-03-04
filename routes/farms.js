@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Farm = require('../models/farm');
+var Animal = require('../models/animal');
 var mongoose=require('mongoose');
+var lookup = require('../public/javascripts/lookup');
+
 
 //create a farm
 router.post('/', function(req, res, next){
@@ -60,6 +63,39 @@ router.get('/', function(req, res, next){
     }
     else{
       res.json(farms);
+    }
+  });
+});
+
+//Delete farm
+router.delete('/', function(req,res,next){
+  let userid=req.query.owner;
+  let farmid=req.query.farm;
+  let userobj=mongoose.Types.ObjectId(userid);
+  let farmobj=mongoose.Types.ObjectId(farmid);
+
+  Farm.remove({'_id':farmid}, function(err){
+    if(err){
+      res.status(500).send(err);
+    }
+    else{
+      User.findById(userid, function(err, user){
+        if(err){
+          res.status(500).send(err);
+        }
+        else{
+          lookup.find(user.farms, farmobj, function(index){
+              if (index > -1) {
+                user.farms.splice(index, 1);
+                user.save(function(err,updatedUser){
+                  Animal.remove({'farm': farmobj}, function(err){
+                    res.json({message: 'Farm deleted!'});
+                  });
+                });
+              }
+          });
+        }
+      });
     }
   });
 });
