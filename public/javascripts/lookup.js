@@ -1,3 +1,4 @@
+"use strict";
 //Simple module for searching values in array of objects
 var Lookup = function () {};
 
