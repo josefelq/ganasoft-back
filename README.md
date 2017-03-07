@@ -154,6 +154,9 @@
     `sexo=[alphanumeric]`
    `foto=[alphanumeric]`
     `descripcion=[alphanumeric]`
+    (optional)`padre=[alphanumeric]` 
+    (optional)`madre=[alphanumeric]` 
+    `fecha_nacimiento=[alphanumeric]`
 
   
     -----------------------------       
