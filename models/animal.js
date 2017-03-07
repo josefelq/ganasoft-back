@@ -7,7 +7,10 @@ var animalSchema=mongoose.Schema({
   raza: String,
   sexo: String,
   foto: String,
-  descripcion: String
+  descripcion: String,
+  padre:{type: mongoose.Schema.Types.ObjectId, ref: 'Animal'},
+  madre:{type: mongoose.Schema.Types.ObjectId, ref: 'Animal'},
+  fecha_nacimiento: String
 });
 
 module.exports = mongoose.model('Animal', animalSchema);

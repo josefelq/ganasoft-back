@@ -13,25 +13,44 @@ let animal = new Animal();
 if(req.body.numero){
   animal.numero=req.body.numero;
 }
+
 if(req.body.especie){
   animal.especie=req.body.especie;
 }
+
 if(req.body.raza){
   animal.raza=req.body.raza;
 }
+
 if(req.body.sexo){
   animal.sexo=req.body.sexo;
 }
+
 if(req.body.foto){
   animal.foto=req.body.foto;
 }
+
 if(req.body.descripcion){
   animal.descripcion=req.body.descripcion;
 }
+
 let someId;
 if(req.body.farm){
   someId=req.body.farm;
   animal.farm=mongoose.Types.ObjectId(someId);
+}
+
+if(req.body.padre){
+  animal.padre=req.body.padre;
+}
+
+if(req.body.madre){
+  animal.madre=req.body.madre;
+}
+
+if(req.body.fecha_nacimiento){
+  //example: 2011-04-11T10:20:30Z
+  animal.fecha_nacimiento=new Date(req.body.fecha_nacimiento);
 }
 animal.save(function(err){
   if(err){
