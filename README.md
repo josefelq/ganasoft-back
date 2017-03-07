@@ -1,5 +1,16 @@
 **Ganasoft API**
 ----
+podrian haber puesto el API en tablas, mas legible para la documentacion
+##Programs
+
+|HTTP Method   |  URI |  description |
+|---|---|---|
+| GET | /api/programs  | Get all the programs  |
+| POST | /api/programs  | Post a program  |
+| GET | /api/programs/:program_id | Get specific program by id  |
+| DELETE | /api/programs/:program_id | Delete specific program by id  |
+
+
 * **URL**
 
   /users
