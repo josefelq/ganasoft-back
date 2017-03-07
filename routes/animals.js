@@ -10,15 +10,29 @@ var lookup = require('../public/javascripts/lookup');
 router.post('/', function(req, res, next){
 let animal = new Animal();
 
-animal.numero=req.body.numero;
-animal.especie=req.body.especie;
-animal.raza=req.body.raza;
-animal.sexo=req.body.sexo;
-animal.foto=req.body.foto;
-animal.descripcion=req.body.descripcion;
-let someId=req.body.farm;
-animal.farm=mongoose.Types.ObjectId(someId);
-
+if(req.body.numero){
+  animal.numero=req.body.numero;
+}
+if(req.body.especie){
+  animal.especie=req.body.especie;
+}
+if(req.body.raza){
+  animal.raza=req.body.raza;
+}
+if(req.body.sexo){
+  animal.sexo=req.body.sexo;
+}
+if(req.body.foto){
+  animal.foto=req.body.foto;
+}
+if(req.body.descripcion){
+  animal.descripcion=req.body.descripcion;
+}
+let someId;
+if(req.body.farm){
+  someId=req.body.farm;
+  animal.farm=mongoose.Types.ObjectId(someId);
+}
 animal.save(function(err){
   if(err){
     res.status(500).send(err);

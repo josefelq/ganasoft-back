@@ -11,11 +11,17 @@ var lookup = require('../public/javascripts/lookup');
 router.post('/', function(req, res, next){
 
   let farm = new Farm();
-  farm.name=req.body.name;
-  farm.size=req.body.size;
-  let someId=req.body.owner;
-  farm.owner=mongoose.Types.ObjectId(someId);
-
+  if(req.body.name){
+    farm.name=req.body.name;
+  }
+  if(req.body.size){
+    farm.size=req.body.size;
+  }
+  let someId;
+  if(req.body.owner){
+    someId=req.body.owner;
+    farm.owner=mongoose.Types.ObjectId(someId);
+  }
   farm.save(function(err){
     if(err){
       res.status(500).send(err);

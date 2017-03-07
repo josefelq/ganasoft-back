@@ -9,6 +9,7 @@ var http = require('http');
 var mongoose = require('mongoose');
 
 const url='mongodb://webdev:webdev@ds113580.mlab.com:13580/heroku_r69x2mtf';
+//const url='mongodb://localhost:27017/test';
 
 mongoose.connect(url);
 

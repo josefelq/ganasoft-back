@@ -1,15 +1,27 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var bcrypt =require('bcrypt-nodejs');
 
 //Add user
 router.post('/', function(req, res, next) {
 
   let user = new User();
-  user.firstname=req.body.firstname;
-  user.lastname=req.body.lastname;
-  user.email=req.body.email;
-  user.password=req.body.password;
+  if(req.body.firstname){
+    user.firstname=req.body.firstname;
+  }
+  if(req.body.lastname){
+    user.firstname=req.body.firstname;
+  }
+  if(req.body.email){
+    user.email=req.body.email;
+  }
+
+  if(req.body.password){
+    var salt = bcrypt.genSaltSync(10);
+    var hash=bcrypt.hashSync(req.body.password, salt);
+    user.password=hash;
+  }
 
   user.save(function(err){
     if(err){
@@ -24,11 +36,18 @@ router.post('/', function(req, res, next) {
 //Get user with email and password
 router.get('/', function(req, res, next){
   if(Object.keys(req.query).length !== 0){
-    User.findOne({'email':req.query.email, 'password':req.query.password}, function(err, users){
+    User.findOne({'email':req.query.email}, function(err, user){
       if(err){
         res.status(500).send(err);
       }
-      res.json(users);
+      else{
+        if(bcrypt.compareSync(req.query.password, user.password)){
+          res.json(user);
+        }
+        else{
+          res.json({message: 'Wrong login!'});
+        }
+      }
     });
   }
   else{
